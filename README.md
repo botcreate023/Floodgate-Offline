@@ -6,6 +6,10 @@ offline-uuid-namespace-prefix: ''
 
 Tested on velocity + leaf(paper) stack
 
+Use cases:
+Lets say you started your server in offline mode along with geyser set as offline mode. In order to use floodgate all the bedrock players uuids will be reset to a xuid combination. Which resets all playerdata.
+With my integration it makes the geyser player have the same uuid regardless so they keep inventory data, which also keeps the base of the api intact like forms being accessed from other plugins APIs.
+
 # Floodgate
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
