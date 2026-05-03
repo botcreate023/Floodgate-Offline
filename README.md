@@ -1,4 +1,4 @@
-#USE THESE SETTINGS FOR TRUE OFFLINE JAVA UUIDS
+# USE THESE SETTINGS FOR TRUE OFFLINE JAVA UUIDS
 ```
 use-offline-uuids: true
 offline-uuid-namespace-prefix: ''
