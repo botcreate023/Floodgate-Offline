@@ -1,3 +1,11 @@
+#USE THESE SETTINGS FOR TRUE OFFLINE JAVA UUIDS
+```
+use-offline-uuids: true
+offline-uuid-namespace-prefix: ''
+```
+
+Tested on velocity + leaf(paper) stack
+
 # Floodgate
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
