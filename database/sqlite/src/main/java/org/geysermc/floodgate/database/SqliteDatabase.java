@@ -57,16 +57,16 @@ public class SqliteDatabase extends CommonPlayerLink {
 
     @Override
     public void load() {
-        // FAILSAFE: If Guice fails to inject the directory, force fallback to default proxy path
+        // FAILSAFE: Using old-school java.io.File conversion which works on ALL Java versions
         if (this.dataDirectory == null) {
-            this.dataDirectory = java.nio.file.Path.of("plugins/floodgate");
+            this.dataDirectory = new java.io.File("plugins/floodgate").toPath();
         }
 
         java.nio.file.Path databasePath = this.dataDirectory.resolve("linked-players.db");
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + databasePath);
-            try (Statement statement = connection.createStatement()) {
+            try (java.sql.Statement statement = connection.createStatement()) {
                 statement.executeUpdate(
                         "create table if not exists LinkedPlayers (bedrockId string, javaUniqueId string, javaUsername string)"
                 );
