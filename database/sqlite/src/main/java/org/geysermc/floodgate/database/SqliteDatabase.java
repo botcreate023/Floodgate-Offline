@@ -57,15 +57,19 @@ public class SqliteDatabase extends CommonPlayerLink {
 
     @Override
     public void load() {
-        // FAILSAFE: Using old-school java.io.File conversion which works on ALL Java versions
         if (this.dataDirectory == null) {
             this.dataDirectory = new java.io.File("plugins/floodgate").toPath();
         }
 
         java.nio.file.Path databasePath = this.dataDirectory.resolve("linked-players.db");
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:" + databasePath);
+            // FORCE standard driver registration across classloaders
+            Class.forName("org.sqlite.JDBC", true, this.getClass().getClassLoader());
+            
+            // Open connection explicitly using default properties to sidestep isolation bugs
+            java.util.Properties props = new java.util.Properties();
+            connection = java.sql.DriverManager.getConnection("jdbc:sqlite:" + databasePath, props);
+            
             try (java.sql.Statement statement = connection.createStatement()) {
                 statement.executeUpdate(
                         "create table if not exists LinkedPlayers (bedrockId string, javaUniqueId string, javaUsername string)"
