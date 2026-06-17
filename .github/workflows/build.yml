@@ -32,8 +32,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         
       - name: Build Floodgate and SQLite Database
-        # Explicitly telling gradle to run the build task on the database sub-projects
-        run: ./gradlew :velocity:build :database:sqlite:build build
+        # Fixed: Changed :database:sqlite:build to :sqlite:build
+        run: ./gradlew :velocity:build :sqlite:build
 
       - name: Archive artifacts (Floodgate Velocity Proxy)
         uses: actions/upload-artifact@v4
