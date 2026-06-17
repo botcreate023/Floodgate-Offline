@@ -9,10 +9,6 @@ on:
       - 'velocity/**'
       - 'build.gradle.kts'
       - 'settings.gradle.kts'
-    paths-ignore:
-      - 'LICENSE'
-      - 'README.md'
-      - '.gitignore'
 
 jobs:
   build:
