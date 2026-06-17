@@ -31,13 +31,22 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         
-      - name: Build Floodgate
-        run: ./gradlew build
+      - name: Build Floodgate and SQLite Database
+        # Explicitly telling gradle to run the build task on the database sub-projects
+        run: ./gradlew :velocity:build :database:sqlite:build build
 
-      - name: Archive artifacts (Floodgate Velocity)
+      - name: Archive artifacts (Floodgate Velocity Proxy)
         uses: actions/upload-artifact@v4
         if: success()
         with:
           name: Floodgate Velocity
           path: velocity/build/libs/floodgate-velocity.jar
+          if-no-files-found: error
+
+      - name: Archive artifacts (Floodgate SQLite Database)
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: Floodgate SQLite Database
+          path: database/sqlite/build/libs/floodgate-sqlite-database.jar
           if-no-files-found: error
